@@ -1,19 +1,31 @@
+/*
+ * Filename: index.js
+ * Author: Allan Phu
+ * Description: Main driver for tic-tac-toe program.
+ * Date: Dec 29 2018
+*/
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
-class Square extends React.Component {
-
-  render() {
-    return (
-      <button 
+/*
+ * Function Name: Square()
+ * Function Prototype: Square(props)
+ * Description: Function component that renders the symbol for the square 
+ *              to the UI.
+ * Parameters: props -- contains the symbol ( 'X', 'O', null ) to render
+ * Return Value: A react element with classname "square" and onClick() method.
+ * Local variables: 
+ */
+function Square(props) {
+  return (
+      <button
         className="square" 
-        onClick={() => this.props.onClick()}
+        onClick = {props.onClick}
       >
-        {this.props.value}
+        {props.value}
       </button>
-    );
-  }
+  );
 }
 
 class Board extends React.Component {
