@@ -73,7 +73,6 @@ class Board extends React.Component {
   render() {
     return (
       <div>
-        <div className="status">{status}</div>
         <div className="board-row">
           {this.renderSquare(0)}
           {this.renderSquare(1)}
@@ -108,8 +107,7 @@ class Game extends React.Component {
   }
   
   // Method to set character for square
-  handleClick(i) {
-    
+  handleClick(i) {  
     const history = this.state.history;
     const current = history[history.length - 1];
     const squares = current.squares.slice();
@@ -136,6 +134,18 @@ class Game extends React.Component {
     const current = history[history.length - 1];
     const winner = calculateWinner(current.squares);
 
+    const moves = history.map((step, move) => {
+      const desc = move ?
+        'Go to move #' + move :
+        'Go to game start';
+      return (
+        <li>
+          <button onClick = {() => this.jumpTo(move)}>
+          {desc}</button>
+        </li>
+      );
+    });
+
     let status;
     if (winner) {
       status = 'Winner: ' + winner;
@@ -155,7 +165,7 @@ class Game extends React.Component {
         </div>
         <div className="game-info">
           <div>{ status }</div>
-          <ol>{/* TODO */}</ol>
+          <ol>{ moves }</ol>
         </div>
       </div>
     );
